@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/Omega/static/css/main.1c68c4aa.css",
-    "main.js": "/Omega/static/js/main.602ba8d9.js",
+    "main.js": "/Omega/static/js/main.ff46d5ab.js",
     "static/js/453.e4226405.chunk.js": "/Omega/static/js/453.e4226405.chunk.js",
     "index.html": "/Omega/index.html",
     "main.1c68c4aa.css.map": "/Omega/static/css/main.1c68c4aa.css.map",
-    "main.602ba8d9.js.map": "/Omega/static/js/main.602ba8d9.js.map",
+    "main.ff46d5ab.js.map": "/Omega/static/js/main.ff46d5ab.js.map",
     "453.e4226405.chunk.js.map": "/Omega/static/js/453.e4226405.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.1c68c4aa.css",
-    "static/js/main.602ba8d9.js"
+    "static/js/main.ff46d5ab.js"
   ]
 }
