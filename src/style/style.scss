@@ -1,0 +1,261 @@
+@import url('https://fonts.googleapis.com/css2?family=Audiowide&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Orbitron:wght@400..900&family=Rammetto+One&display=swap');
+
+:root {
+    --color-theme: #20D3C2;
+    --color-theme-light: #EDFCFA;
+    --color-theme-dark: #0E153D; 
+    --color-dark: #080C24; 
+    --color-white: #FFFFFF;
+    --color-gray-0: #AAAAAA;
+    --color-gray-1: #CCCCCC;
+    --color-gray-2: #E3E3E3;
+    --color-gray-3: #EEEEEE;
+    --color-gray-4: #F6F6F6;
+    --color-editBtn: #82D8C6;
+    --color-product-outofstock: #FE6C6C;
+  
+    --font-rammetto: 'Rammetto One', sans-serif;
+    --font-audiowide: 'Audiowide', sans-serif;
+    --font-orbitron: 'Orbitron', sans-serif;
+    --font-kanit: 'Kanit', sans-serif;
+    --font-weight-regular: 400;
+    --font-weight-medium: 500;
+    --font-weight-bold: 700;
+    --font-size-14: 1.17rem;
+    --font-size-16: 1.33rem;
+    --font-size-18: 1.50rem;
+    --font-size-24: 2rem;
+    --font-size-36: 3rem;
+    --font-size-60: 5rem;
+  
+    --border-radius-small: 8px;
+    --border-radius-medium: 25px;
+    --border-radius-rounded: 50%;
+}
+
+html,
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: var(--font-orbitron);
+  font-weight: var(--font-weight-regular);
+  background-color: #f4f4f9;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    
+    & h1 {
+        margin: 30px auto;
+    }
+
+    & .machines {
+        display: flex;
+        flex-direction: column;
+       // 
+        align-items: start;
+        width: 100%;
+        gap: 30px;
+
+        & .machine {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 50px;
+            border: 1px solid #28a745;
+            background-color: #e9ecef;
+            border-radius: 4px;
+            width: 100% !important;
+
+            & h3 {
+                display: flex;
+                justify-content: center;
+                text-align: center;
+                align-items: center;
+                width: 100%;
+                height: 50px;
+            }
+
+            & .drag-drop-container {
+                display: flex;
+                justify-content: space-between;
+                padding: 0 10px;
+                gap: 10px;
+
+                & .drag-box {
+                    display: flex;
+                    flex: 1;
+                    flex-direction: column;
+                    //border: 1px solid gray;
+                    
+            
+                    & input[type="text"] {
+                        width: 100%;
+                        margin-bottom: 10px;
+                        padding: 5px;
+                        width: 100%;
+                        margin-bottom: 10px;
+                    }
+            
+                    & button {
+                        padding: 5px 10px;
+                        cursor: pointer;
+                        margin-bottom: 20px;
+                    }
+            
+                    & .drag-box-items {
+                        display: grid;
+                        grid-template-columns: 1fr 1fr;
+                        flex-wrap: wrap;
+                        grid-auto-columns: auto;
+                        gap: 10px;
+                        max-height: 600px;
+                        overflow-y: auto;
+            
+                        & .drag-box-item {
+                            border: 2px dashed #007bff;
+                            background-color: #e9ecef;
+                            width: 1fr;
+                            height: 50px;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            cursor: pointer;
+                        }
+                    }
+                }
+
+                & .line {
+                    border: 1px solid black;
+                }
+    
+                & .drop-box {
+                    display: flex;
+                    flex-direction: column;
+                    flex: 2;
+                    justify-content: start;
+                    padding: 0;
+                    gap: 10px;
+
+                    & .pipe {
+                        display: flex;
+                        list-style-type: none;
+                        padding: 10px;
+                        background-color: #fff;
+                        border: 2px solid #007bff;
+                        border-radius: 20px;
+                        min-height: 70px;
+                        gap: 5px;
+                        cursor: pointer;
+
+                        & .pipe-number {
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            border: 1px solid #007bff;
+                            border-radius: 50%;
+                            font-weight: 600;
+                            height: 50px;
+                            width: 50px;
+                        }
+
+                        & ul {
+                            display: flex;
+                           flex-direction: column;
+                            padding-left: 5px;
+                            gap: 15px;
+                            
+    
+                            & .wish-item {
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                gap: 10px;
+
+                                & .wish-item-info {
+                                    position: relative;
+                                    display: flex;
+                                    justify-content: center;
+                                    align-items: center;
+                                    border: 1px solid black;
+                                    border-radius: 12px;
+                                    padding: 0 10px;
+                                    height: 50px;
+
+                                    & h4 {
+                                        min-width: 150px;
+                                        margin: 0;
+                                    }
+        
+                                    & h6 {
+                                        position: absolute;
+                                        bottom: -15px;
+                                        right: 20px;
+                                        font-size: 10px;
+                                        background-color: white;
+                                        padding: 0 10px;
+                                    }
+    
+                                    & select {
+                                       font-size: 20px;
+                                    }
+                                }
+    
+                                & button {
+                                    right: -55px;
+                                    height: 50px;
+                                    width: 50px;
+                                    border: 1px solid black;
+                                    border-radius: 12px;
+                                    font-size: 32px;
+                                    background-color: #FE6C6C;
+                                    color: white;
+                                }
+                            }    
+                        }
+
+                        &:hover {
+                            background-color: #f1f1f1;
+
+                            & ul {
+                                & .wish-item {
+                                    & .wish-item-info {
+                                        & h6 {
+                                            background-color: #f1f1f1;
+                                        }
+
+                                        & select {
+                                            background-color: #f1f1f1;
+                                        }
+                                    }
+                                }    
+                            }
+                        }
+                    }
+                }
+            }
+        }       
+    }
+}
+
+
+.wishlist {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .wishlist li {
+    background-color: #fff;
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
