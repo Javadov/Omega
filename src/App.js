@@ -9,7 +9,7 @@ import './style.css';
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
       <Routes>
         <Route exact path="/" element={<HomePage />} />
         <Route exact path="/wish" element={<WishPage />} />
