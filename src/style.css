@@ -36,7 +36,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   font-family: var(--font-orbitron);
   font-weight: var(--font-weight-regular);
-  background-color: pink;
+  background-color: #f4f4f9;
   height: 100vh;
   margin: 0;
   padding: 0;
@@ -51,6 +51,27 @@ body {
 }
 .container h1 {
   margin: 30px auto;
+}
+.container .pages {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 100px auto;
+  gap: 30px;
+}
+.container .pages a {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 300px;
+  height: 70px;
+  border: 1px solid black;
+  border-radius: var(--border-radius-small);
+  text-decoration: none;
+  background-color: #fbdeed;
+  font-size: 24px;
 }
 .container .machines {
   display: flex;
@@ -208,16 +229,146 @@ body {
 .container .machines .machine .drag-drop-container .drop-box .pipe:hover ul .wish-item .wish-item-info select {
   background-color: #f1f1f1;
 }
-
-.wishlist {
+.container .wishlist {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
   list-style-type: none;
   padding: 0;
 }
-
-.wishlist li {
+.container .wishlist li {
+  position: relative;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  text-align: left;
   background-color: #fff;
   margin: 5px 0;
+  height: 70px;
   padding: 10px;
   border-radius: 4px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  gap: 10px;
+}
+.container .wishlist li .fa-arrow-right {
+  font-size: 30px;
+  margin: 0 20px;
+}
+.container .wishlist li .fa-angle-right {
+  font-size: 30px;
+}
+.container .wishlist li .wish-material {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
+  background-color: #e9f9fb;
+  height: 50px;
+  min-width: 150px;
+  border: 1px solid black;
+  border-radius: 4px;
+}
+.container .wishlist li .wish-machine {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
+  background-color: #f9ffdd;
+  height: 50px;
+  width: 50px;
+  border: 1px solid black;
+  border-radius: 50%;
+}
+.container .wishlist li .wish-pipe {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
+  background-color: #e9f9fb;
+  height: 50px;
+  width: 50px;
+  border: 1px solid black;
+  border-radius: 50%;
+}
+.container .wishlist li .wish-urgency {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
+  background-color: #e9f9fb;
+  height: 50px;
+  width: 150px;
+  border: 1px dashed black;
+  border-radius: 4px;
+}
+.container .wishlist li .wish-urgency span {
+  position: absolute;
+  bottom: -10px;
+  display: flex;
+  background-color: white;
+  padding: 0 5px;
+  border: 1px dashed black;
+  border-radius: 4px;
+  font-size: 10px;
+}
+@keyframes flash {
+  0% {
+    background-color: red;
+  }
+  50% {
+    background-color: rgb(251, 251, 251);
+    color: rgb(0, 0, 0);
+  }
+  100% {
+    background-color: red;
+  }
+}
+.container .wishlist li .urgency-asap {
+  animation: flash 1s infinite;
+}
+.container .wishlist li .urgency-15min {
+  background-color: orange;
+}
+.container .wishlist li .urgency-30min {
+  background-color: yellow;
+  color: black; /* Black text for better readability */
+}
+.container .wishlist li .urgency-1timme {
+  background-color: rgb(92, 219, 92);
+}
+.container .wishlist li:hover .delete-button, .container .wishlist li:focus-within .delete-button {
+  opacity: 1;
+}
+.container .wishlist li button {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 25px;
+  font-weight: 600;
+  border-radius: 50%;
+  right: -60px;
+  height: 50px;
+  width: 50px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.container footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 30px 0;
+}
+.container footer p {
+  margin: 0;
+  padding: 0;
+}
+.container footer p a {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 10px;
+  color: var(--color-dark);
+  text-decoration: none;
 }

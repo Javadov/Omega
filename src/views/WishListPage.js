@@ -2,6 +2,8 @@
 import React, { useEffect, useState, useRef } from "react";
 import { database } from "../components/firebase";
 import { ref, onValue, remove } from "firebase/database";
+import FooterView from "../sections/FooterView";
+
 
 const urgencyPriority = {
   "ASAP": 1,
@@ -53,17 +55,40 @@ const WishListPage = () => {
     remove(wishRef);
   };
 
+  const formatTimestamp = (timestamp) => {
+    const date = new Date(timestamp);
+    return `${date.getFullYear()}/${String(date.getMonth() + 1).padStart(2, '0')}/${String(date.getDate()).padStart(2, '0')} ${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}`;
+  };
+
+  const getUrgencyClassName = (urgency) => {
+    switch (urgency) {
+      case 'ASAP':
+        return 'urgency-asap';
+      case 'om 15 min':
+        return 'urgency-15min';
+      case 'om 30 min':
+        return 'urgency-30min';
+      case 'om 1 timme':
+        return 'urgency-1timme';
+      case 'om 2 timme':
+        return 'urgency-1timme';
+      default:
+        return '';
+    }
+  };
+
   return (
     <div className="container">
-      <h1>Wish List</h1>
+      <h1>ÖNSKELISTA</h1>
       <ul className="wishlist">
         {wishes.map((wish) => (
           <li key={wish.id} className="wish-item">
-            {wish.material} --- {wish.machine} - {wish.pipe} ({wish.urgency})
-            <button onClick={() => handleDelete(wish.id)} className="delete-button">X</button>
+            <div className="wish-material">{wish.material}</div> <div className={`wish-urgency ${getUrgencyClassName(wish.urgency)}`}>{wish.urgency} <span>{formatTimestamp(wish.timestamp)}</span></div> <i className="fa-solid fa-arrow-right"></i> <div className="wish-machine">{wish.machine}</div> <i className="fa-solid fa-angle-right"></i> <div className="wish-pipe">{wish.pipe}</div>  
+            <button onClick={() => handleDelete(wish.id)} className="delete-button btn btn-success"><i class="fa-solid fa-check"></i></button>
           </li>
         ))}
       </ul>
+      <FooterView />
     </div>
   );
 };

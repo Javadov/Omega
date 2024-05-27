@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { database } from "../components/firebase";
 import { ref, set, onValue, remove, update } from "firebase/database";
 import { Modal, Button } from "react-bootstrap";
+import FooterView from "../sections/FooterView";
 
 const initialMaterials = [
     "GP03", "LLD", 
@@ -174,6 +175,8 @@ const WishPage = () => {
                     </Button>
                 </Modal.Footer>
             </Modal>
+
+            <FooterView />
         </div>
     );
 };
