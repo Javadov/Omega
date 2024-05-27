@@ -11,9 +11,9 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/wish" element={<WishPage />} />
-        <Route path="/wishlist" element={<WishListPage />} />
+        <Route exact path="/" element={<HomePage />} />
+        <Route exact path="/wish" element={<WishPage />} />
+        <Route exact path="/wishlist" element={<WishListPage />} />
       </Routes>
     </Router>
   );
