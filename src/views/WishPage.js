@@ -157,7 +157,7 @@ const WishPage = () => {
 
             <Modal show={showUrgencyModal} onHide={() => setShowUrgencyModal(false)}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Select Urgency</Modal.Title>
+                    <Modal.Title>Välj Brådskande</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <select value={selectedUrgency} onChange={(e) => setSelectedUrgency(e.target.value)}>
@@ -167,12 +167,8 @@ const WishPage = () => {
                     </select>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={() => setShowUrgencyModal(false)}>
-                        Cancel
-                    </Button>
-                    <Button variant="primary" onClick={handleUrgencySelect}>
-                        Confirm
-                    </Button>
+                    <Button variant="secondary" onClick={() => setShowUrgencyModal(false)}>Avbryt</Button>
+                    <Button variant="primary" onClick={handleUrgencySelect}>Bekräfta</Button>
                 </Modal.Footer>
             </Modal>
 

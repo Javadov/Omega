@@ -6,8 +6,8 @@ const HomePage = () => {
     <>
        <div className="container">
             <div className="pages"> 
-                <NavLink className="__pagelink" to="/wish" end>Wish</NavLink>
-                <NavLink className="__pagelink" to="/wishlist" end>WishList</NavLink>
+                <NavLink className="__pagelink" to="/wish" end>TILLÖNSKAN</NavLink>
+                <NavLink className="__pagelink" to="/wishlist" end>ÖNSKELISTA</NavLink>
             </div>
         </div>    
     </>
