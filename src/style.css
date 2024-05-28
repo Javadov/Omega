@@ -133,7 +133,7 @@ body {
 }
 .container .machines .machine .drag-drop-container .drag-box .drag-box-items .drag-box-item {
   border: 2px dashed #007bff;
-  background-color: #e9ecef;
+  background-color: #defafb;
   width: 1fr;
   height: 50px;
   display: flex;

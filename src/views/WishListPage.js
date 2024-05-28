@@ -80,6 +80,7 @@ const WishListPage = () => {
   return (
     <div className="container">
       <h1>ÖNSKELISTA</h1>
+
       <ul className="wishlist">
         {wishes.map((wish) => (
           <li key={wish.id} className="wish-item">
@@ -88,6 +89,7 @@ const WishListPage = () => {
           </li>
         ))}
       </ul>
+      
       <FooterView />
     </div>
   );
