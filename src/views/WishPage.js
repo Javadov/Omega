@@ -7,7 +7,7 @@ import DndContext from "../context/DndContext";
 import FooterView from "../sections/FooterView";
 
 const initialMaterials = [
-    "GP03", "LLD", 
+    "GP03", "LLD",
     "REG100", "REG200", "REG300", "REG400", "REG500", "REG700", "REGX",      //REG
     "6230", "3450", "1350", "4466", "6244", "0201", "0201FX", "2350", "1810",
     "A-Pall", "B-Pall", //Pall
@@ -40,31 +40,28 @@ const WishPage = () => {
     useEffect(() => {
         const wishesRef = ref(database, 'wishes');
         onValue(wishesRef, (snapshot) => {
-        const data = snapshot.val();
-        if (data) {
-            const wishes = Object.entries(data).map(([id, wish]) => ({ id, ...wish }));
-            const updatedMachineWishes = {};
-            wishes.forEach(wish => {
-            const key = `${wish.machine}_${wish.pipe}`;
-            if (!updatedMachineWishes[key]) {
-                updatedMachineWishes[key] = [];
+            const data = snapshot.val();
+            if (data) {
+                const wishes = Object.entries(data).map(([id, wish]) => ({ id, ...wish }));
+                const updatedMachineWishes = {};
+                wishes.forEach(wish => {
+                    const key = `${wish.machine}_${wish.pipe}`;
+                    if (!updatedMachineWishes[key]) {
+                        updatedMachineWishes[key] = [];
+                    }
+                    updatedMachineWishes[key].push(wish);
+                });
+                setMachineWishes(updatedMachineWishes);
+            } else {
+                setMachineWishes({});
             }
-            updatedMachineWishes[key].push(wish);
-            });
-            setMachineWishes(updatedMachineWishes);
-        } else {
-            setMachineWishes({});
-        }
         });
     }, []);
 
-    const handleDrag = (material) => {
-        setWish(material);
-    };
-
-    const handleDrop = (machine, pipe) => {
+    const handleDrop = (machine, pipe, material) => {
         setSelectedMachine(machine);
         setSelectedPipe(pipe);
+        setWish(material);
         setShowUrgencyModal(true);
     };
 
@@ -83,8 +80,8 @@ const WishPage = () => {
 
     const handleInsert = () => {
         if (newMaterial && !materials.includes(newMaterial)) {
-        setMaterials([...materials, newMaterial]);
-        setNewMaterial("");
+            setMaterials([...materials, newMaterial]);
+            setNewMaterial("");
         }
     };
 
@@ -107,6 +104,48 @@ const WishPage = () => {
         return `${date.getFullYear()}/${String(date.getMonth() + 1).padStart(2, '0')}/${String(date.getDate()).padStart(2, '0')} ${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}`;
     };
 
+    const Material = ({ material }) => {
+        const [, drag] = useDrag(() => ({
+            type: "MATERIAL",
+            item: { material },
+        }));
+
+        return (
+            <div ref={drag} className="drag-box-item">
+                {material}
+            </div>
+        );
+    };
+
+    const Pipe = ({ machine, pipe }) => {
+        const [, drop] = useDrop(() => ({
+            accept: "MATERIAL",
+            drop: (item) => handleDrop(machine, pipe, item.material),
+        }));
+        
+        return (
+            <li ref={drop} className="pipe">
+                <h5 className="pipe-number">{pipe}</h5>
+                <ul>
+                    {(machineWishes[`${machine}_${pipe}`] || []).map(wish => (
+                        <li key={wish.id} className="wish-item">
+                            <div className="wish-item-info">
+                                <h4>{wish.material} </h4>
+                                <select value={wish.urgency} onChange={(e) => handleUrgencyChange(wish.id, e.target.value)}>
+                                    {urgencyOptions.map(option => (
+                                        <option key={option} value={option}>{option}</option>
+                                    ))}
+                                </select>
+                                <h6>{formatTimestamp(wish.timestamp)}</h6>
+                            </div>
+                            <button onClick={() => handleDelete(wish.id)} className="delete-button"><i className="fa-solid fa-xmark"></i></button>
+                        </li>
+                    ))}
+                </ul>
+            </li>
+        );
+    };
+
     return (
         <DndContext>
             <div className="container">
@@ -123,32 +162,16 @@ const WishPage = () => {
                                         <input type="text" placeholder="Lägg till nytt material..." value={newMaterial} onChange={(e) => setNewMaterial(e.target.value)} />
                                         <button onClick={handleInsert} style={{ marginBottom: "20px" }}>Lägg Till</button>
 
-                                        <div className="drag-box-items"> 
+                                        <div className="drag-box-items">
                                             {filteredMaterials.map((material, index) => (
-                                                <div key={material} draggable onDragStart={() => handleDrag(material)} className="drag-box-item" > 
-                                                    {material} 
-                                                </div>
+                                                <Material key={material} material={material} />
                                             ))}
                                         </div>
                                     </div>
                                     <div className="line"></div>
                                     <ul className="drop-box">
                                         {pipes.map(pipe => (
-                                            <li key={pipe} onDrop={() => handleDrop(machine, pipe)} onDragOver={(e) => e.preventDefault()} className="pipe"> 
-                                                <h5 className="pipe-number">{pipe}</h5>
-                                                <ul>
-                                                    {(machineWishes[`${machine}_${pipe}`] || []).map(wish => (
-                                                    <li key={wish.id} className="wish-item"> 
-                                                        <div className="wish-item-info">
-                                                            <h4>{wish.material} </h4>
-                                                            <select value={wish.urgency} onChange={(e) => handleUrgencyChange(wish.id, e.target.value)}>{urgencyOptions.map(option => (<option key={option} value={option}>{option}</option>))}</select>
-                                                            <h6>{formatTimestamp(wish.timestamp)}</h6>
-                                                        </div>
-                                                        <button onClick={() => handleDelete(wish.id)} className="delete-button"><i className="fa-solid fa-xmark"></i></button>
-                                                    </li>
-                                                    ))}
-                                                </ul>
-                                            </li>
+                                            <Pipe key={pipe} machine={machine} pipe={pipe} />
                                         ))}
                                     </ul>
                                 </div>
